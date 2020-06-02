@@ -138,6 +138,7 @@ class FaceAlignment:
 
         if detected_faces is None:
             detected_faces = self.face_detector.detect_from_image(image[..., ::-1].copy())
+            # return this variable as well
 
         if len(detected_faces) == 0:
             print("Warning: No faces were detected.")
@@ -183,7 +184,7 @@ class FaceAlignment:
 
             landmarks.append(pts_img.numpy())
 
-        return landmarks
+        return landmarks, detected_faces
 
     def get_landmarks_from_directory(self, path, extensions=['.jpg', '.png'], recursive=True, show_progress_bar=True):
         detected_faces = self.face_detector.detect_from_directory(path, extensions, recursive, show_progress_bar)
